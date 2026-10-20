@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ballon d'Or — Race to the Top</title>
+<style>
+/*
+   1) VARIABLES + RESET These variables keep the visual system consistent and easy to edit.===== */
+:root {
+  --ink: #111;
+  --muted: #555;
+  --bg: #5b5b5b;
+  --card: #fff;
+  --line: rgba(0,0,0,.12);
+  --shadow: 0 10px 22px rgba(0,0,0,.14);
+  --radius: 14px;
+
+  /* National-team inspired card colors */
+   /* WHEN MAKING CARD SETS OR SOMETHING SIMILAR TO THIS SITE OR WHAT WE CREATED IN MODULE 6 USING CLASS NAMES 
+   MAKES IT EASIIER GO BACK AND EDIT IT ONE TIME + YOU HAVE SIMPLE DEFINERS  */
+  --england-red: #c8102e;
+  --spain-red: #aa151b;
+  --spain-gold: #f1bf00;
+  --france-navy: #14213d;
+}
+
+
+* { box-sizing: border-box; }
+
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+
+  /* 16px minimum keeps body text readable on phones.
+
+
+     1.1vw is the fluid preferred value.
+
+
+     19px prevents excessive growth on desktop. */
+
+
+  font-size: clamp(16px, 1.1vw, 19px);
+  line-height: 1.6;
+}
+
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 32px);
+}
+
+
+h1 {
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+
+  /* Strong on phones without becoming huge on desktop. */
+  font-size: clamp(30px, 4.5vw, 50px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 2.5vw, 34px);
+  line-height: 1.2;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.25;
+}
+
+p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  max-width: 65ch;
+}
+
+/* Small text remains readable while staying subordinate.  THIS IS THE TEXT SIZE DEFINER OR WHAT CONTROLS THE TEXT SIZE 
+SPECIFACALLY FOR SMALL SCREENS LIKE ON OUR OTHER PROJECT JUST FOR TEXT THIS MAKES IT ADJUST SIZE FOR 600PX DISPLAY OR SMALLER.*/
+.small {
+  font-size: clamp(13px, 0.9vw, 15px);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* =========================================
+   4) SECTIONS / CARDS
+   This preserves the supplied site's card system.
+   ========================================= */
+.hero {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(14px, 2.4vw, 24px);
+  box-shadow: var(--shadow);
+  margin-bottom: clamp(14px, 2.4vw, 22px);
+}
+
+/* One column is used first for small screens. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(12px, 2vw, 18px);
+  box-shadow: var(--shadow);
+}
+
+
+
+/* Harry Kane  England red on white to represent the national team colors and flair */
+.card-kane {
+  background: #fff;
+  border-color: var(--england-red);
+}
+
+.card-kane h3,
+.card-kane p,
+.card-kane .candidate,
+.card-kane .small {
+  color: var(--england-red);
+}
+
+.card-kane h3,
+.card-kane .candidate {
+  font-weight: 700;
+}
+
+/* Lamine Yamal — Spain gold background + Spanish red  to represent the national team colors and winnig gold of the spanish squad  */
+.card-yamal {
+  background: var(--spain-gold);
+  border-color: var(--spain-red);
+}
+
+.card-yamal h3,
+.card-yamal p,
+.card-yamal .candidate,
+.card-yamal .small {
+  color: var(--spain-red);
+}
+
+.card-yamal h3,
+.card-yamal .candidate {
+  font-weight: 700;
+}
+
+/* Kylian Mbappé — French navy + white text  to represent the national team colors and cool collection France has accuqired  */
+.card-mbappe {
+  background: var(--france-navy);
+  border-color: var(--spain-red);
+}
+
+.card-mbappe h3,
+.card-mbappe p,
+.card-mbappe .candidate,
+.card-mbappe .small {
+  color: #fff;
+}
+
+.card-mbappe h3,
+.card-mbappe .candidate {
+  font-weight: 700;
+}
+
+/* 
+   5) BREAKPOINTS - WHAT IT IS : THINK OF BREAKPOINTS AS THE POINTS OF CLIMAX OR WHEN ACTIONS MUST OCCUR 
+   THE BREAKPOINTS WE HAVE DEFINED ARE SET IN DIFFERENT PIXEL SIZES SO WHEN A SCREEN IS MADE SMALLER OR LARGER WE SHIFT AND MOVE THROUGH THESE POINTS OF CLIMAX
+   OR BREAKPINTS why it matters: BECAUSE WE USE THESE TO CREATE MANY DIFFERENT USABLE EXPERINCES ACROSS THE WEB TO MAKE IT FORMAT FOR EVERY USER ON ANY DEVICE 
+
+
+   say we had a super large phone the i-movie sreen that had a display of 2000px that could be our 4th breakpoint or column 
+   
+   
+   Phone = 1 column. 600 PX 
+   Tablet = 2 columns 900 PX 
+   Desktop = 3 columns 1200px 
+  */
+@media (min-width: 720px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 980px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Simple assignment footer. */
+footer {
+  margin-top: 18px;
+  border-top: 1px solid rgba(255,255,255,.35);
+  padding-top: 12px;
+}
+
+footer .small {
+  color: #fff;
+}
+
+
+/* 
+   4B) PLAYER IMAGES + NATIONAL FLAG ICONS. /* Keeps each player's photo inside the card while
+   maintaining a clean, consistent card height. */
+
+
+.player-image {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  margin: 0 0 14px;
+  border: 1px solid rgba(0,0,0,.10);
+}
+
+
+.card-yamal .player-image {
+  object-position: center 35%;
+}
+
+
+.player-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.flag-icon {
+  width: 28px;
+  height: 19px;
+  flex: 0 0 28px;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.22);
+  border: 1px solid rgba(0,0,0,.16);
+}
+
+
+
+
+
+/*  MAX WIDTH what is is- On smaller screens, let the image remain prominent  without making the card unnecessarily tall.  WHY IT MATTERS- This matters because we have to gave a set 
+size for images to stay disp;ayed or else they woudl act out if character with or clamp headings, with carry the same functiosn as flexbox and responsive images */
+@media (max-width: 719px) {
+  .player-image { height: 200px; }
+  .flag-icon { width: 26px; height: 18px; flex-basis: 26px; }
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+    <!-- CARD 1: BALLON D'OR HISTORY -->
+  
+  <section class="hero">
+    <h1>BALON D'OR: Race to the Top!</h1>
+
+    <p>
+      The Ballon d'Or is football's most famous individual prize: a golden
+      argument over who mattered most when the biggest matches, biggest
+      moments, and biggest expectations arrived. France Football created the
+      award in 1956, originally as a European honor, before its eligibility
+      expanded and the trophy became a global stage. Stanley Matthews won the
+      first edition; since then the award has passed through eras defined by
+      Cruyff, Platini, Ronaldo, Messi, and many more.
+    </p>
+
+    <p>
+      People care because the Ballon d'Or is not simply a goals leaderboard.
+      It is a debate about individual performance, influence, consistency,
+      major competitions, trophies, and the unforgettable moments that make a
+      season feel historic. Lionel Messi holds the men's record with eight
+      wins, while Cristiano Ronaldo has five. Lev Yashin remains the only
+      goalkeeper ever to win it.  <br> <i>The prize matters because it turns an entire season into one
+          question: who was the most decisive, influential, and memorable
+          player? Trophies matter. Statistics matter. Big matches matter.</i> 
+    </p>
+
+    <p>
+      The 2026 race has another twist: the World Cup is part of the story.
+      Harry Kane, Lamine Yamal, and Kylian Mbappé arrive with radically
+      different cases. One has the numbers, one has the wonder, and one has
+      the tournament spotlight. The trophy is waiting. The question is who
+      made the strongest case when the whole football year is placed on trial.
+    </p>
+
+    <p class="small">
+      2026 snapshot • The award ceremony is scheduled for October 26, 2026.
+      Candidate statistics below focus primarily on the 2025–26 evaluation
+      period, including club football and the 2026 World Cup.
+    </p>
+  </section>
+
+
+  <section>
+    <h2>THE FRONT RUNNERS</h2>
+
+    <div class="grid">
+
+  
+     
+
+      <!-- CARD 2: HARRY KANE -->
+      <article class="card card-kane">
+        <img class="player-image" src="assets/harry-kane.jpeg" alt="Harry Kane in action for Bayern Munich">
+        <h3 class="player-heading"><img class="flag-icon" src="assets/england-flag.svg" alt="England flag">Harry Kane — The Goal Machine</h3>
+        <p>
+          <span class="candidate">Bayern Munich • England</span> — Kane enters
+          the race carrying the heaviest statistical suitcase of the three.
+          In 2025–26 he produced 73 goals and 8 assists in 65 matches for
+          Bayern and England, including 65 goals for Bayern across all
+          competitions.
+        </p>
+        <p>
+          The headline gets louder: he won the Bundesliga, DFB-Pokal, and
+          German Super Cup, claimed the European Golden Shoe, and scored
+          36 Bundesliga goals. At the 2026 World Cup he added six goals and
+          helped England reach third place, their best men's World Cup finish
+          since 1966.
+        </p>
+        <p>
+          <span class="candidate">Why should Kane win?</span> The argument is
+          brutally simple: production at an almost absurd level across club
+          and country while collecting major trophies. His 73-goal season was
+          the second-best scoring campaign by any player since the turn of
+          the millennium, behind only Lionel Messi's 82-goal 2011–12 season.
+          If voters want the candidate who left the smallest gap between
+          opportunity and outcome, Kane has made that gap disappear.
+        </p>
+        <p class="small">
+          2025–26: 65 matches • 73 goals • 8 assists • 6 World Cup goals •
+          Bundesliga + DFB-Pokal + Super Cup
+        </p>
+      </article>
+
+      <!-- CARD 3: LAMINE YAMAL -->
+      <article class="card card-yamal">
+        <img class="player-image" src="assets/lamine-yamal.jpeg" alt="Lamine Yamal in action for Barcelona">
+        <h3 class="player-heading"><img class="flag-icon" src="assets/spain-flag.svg" alt="Spain flag">Lamine Yamal — The Wonderkid With a Crown</h3>
+        <p>
+          <span class="candidate">FC Barcelona • Spain</span> — Yamal's case
+          feels less like a machine and more like a magician who keeps
+          producing numbers. In 2025–26 he recorded 25 goals and 20 assists
+          in 57 matches, while helping Barcelona win La Liga and Spain win
+          the 2026 World Cup.
+        </p>
+        <p>
+          His league campaign alone tells the story: 16 goals and 12 assists
+          as Barcelona defended the La Liga title, earning Yamal the league's
+          Player of the Season award. He also arrived at the year with two
+          straight Kopa Trophies already in his collection.
+        </p>
+        <p>
+          <span class="candidate">Why should Yamal win?</span> Because the
+          Ballon d'Or has never been only about raw scoring. Yamal combines
+          chance creation, goals, assists, imagination, and major-match
+          influence with a World Cup-winning season for Spain. At 19, he has
+          already turned himself from a promising name into one of football's
+          central characters. If voters reward the player who made the game
+          look newest, his case becomes extremely hard to ignore.
+        </p>
+        <p class="small">
+          2025–26: 57 matches • 25 goals • 20 assists • La Liga + Super Cup •
+          World Cup winner • La Liga Player of the Season
+        </p>
+      </article>
+
+      <!-- CARD 4: KYLIAN MBAPPE -->
+      <article class="card card-mbappe">
+        <img class="player-image" src="assets/kylian-mbappe.jpeg" alt="Kylian Mbappé in action for Real Madrid">
+        <h3 class="player-heading"><img class="flag-icon" src="assets/france-flag.svg" alt="France flag">Kylian Mbappé — The Tournament Specialist</h3>
+        <p>
+          <span class="candidate">Real Madrid • France</span> — Mbappé's
+          campaign has the kind of final-act drama Ballon d'Or voters notice.
+          For Real Madrid in 2025–26 he scored 42 goals in 44 matches,
+          finished as La Liga's top scorer with 25 goals, and led the
+          Champions League scoring chart with 15.
+        </p>
+        <p>
+          Then came the World Cup. Mbappé scored 10 goals for France and won
+          the adidas Golden Boot. More astonishingly, he became the first
+          player ever to win the World Cup Golden Boot twice, after also taking
+          it in 2022. His World Cup total reached 22 goals in 22 matches,
+          making him the tournament's all-time leading scorer.
+        </p>
+        <p>
+          <span class="candidate">Why should Mbappé win?</span> Because when
+          the football calendar became a pressure cooker, he produced. His
+          club season supplied elite scoring numbers, while the World Cup
+          supplied the unforgettable individual tournament performance.
+          France did not lift the World Cup, but Mbappé still walked away with
+          the Golden Boot and another piece of football history.
+        </p>
+        <p class="small">
+          2025–26: 42 goals in 44 Real Madrid matches • 25 La Liga goals •
+          15 Champions League goals • 10 World Cup goals • World Cup Golden Boot
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>
+
+  
+   
+  </footer>
+
+</div>
+</body>
+</html>
+
+
+ <!-- SIMILAR TO HOW THE CLASSING OF DIFFERENT CARDS AND SECTIONS CAN BE USED TO FULLY EDIT OR PLACE OR GROUP ARTICLES, FLEXBOXS, DIVS ETC, WE USE A CLASS IN THIS CASE 
+  TO ACTUALLY DEFINE AND MARK SECTIONA OF TEXT WHEN USING P AND TAGS LIKE THAT TYPE CLASS AND DEFINE IT WE CALLED IT SMALL BECAUSE I GO ON TO LOWER THE SIZE OF THIS 
+  TEXT TO MAKE IT LOOK SIMILAER TO A FIFA CARD.......
+  
+  NOW IF I COULD MAKE THE BORDERS AND OVERALL CARDS HAVE FRAMES OR UNQUE SHAPES THEY MIGHT EVEN LOOK LIKE FIFA CARDS WITH MAYBE A FORM OR DETAILS SYNTAX TO HELP DISPLAY INFORMATION 
+  -->
+
+ <!-- FOR THE STATS IN THE SMALL TEXT THEY ARE COPIED AND PASTED FROM UEFA AND FIFA OFFICAL RECORD KEEPING SITES THE ORGANIZATION OF THEM VIA THEIR SOFTWARE.-->
